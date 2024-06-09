@@ -16,6 +16,24 @@ import {
   getStoredOptions,
   LocalStorageOptions,
 } from '../utils/storage'
+async function loadFirebase() {
+  // Dynamically import the Firebase app module
+  const { initializeApp } = await import('firebase/app');
+
+  // Your Firebase config object
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLoDDlq8xRNXH3uvTCvwBPIZp302zG8NQ",
+    authDomain: "chrome-extension-gpt-util.firebaseapp.com",
+    projectId: "chrome-extension-gpt-util",
+    storageBucket: "chrome-extension-gpt-util.appspot.com",
+    messagingSenderId: "998134105401",
+    appId: "1:998134105401:web:c660c43faf0146645b54e8",
+    measurementId: "G-RBJHLC64TY"
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  return app;
+}
 
 type AppProps = {
   path: string;
@@ -133,7 +151,7 @@ const App: React.FC<{}> = () => {
           <Paper>
             <div style={{display:'flex'}}>
               <div style={{flex: 11,justifyItems:'center',alignItems:'center',marginTop:'8px',marginLeft:'5px'}}><InputBase
-                placeholder="Add your destination root path"
+                placeholder="Add your prompt"
                 fullWidth
                 value={pathInput}
                 onChange={(event) => setPathInput(event.target.value)}
@@ -164,3 +182,8 @@ const App: React.FC<{}> = () => {
 const root = document.createElement('div')
 document.body.appendChild(root)
 ReactDOM.render(<App />, root)
+loadFirebase().then(app => {
+  console.log('Firebase has been initialized!', app);
+}).catch(error => {
+  console.error('Error loading Firebase:', error);
+});

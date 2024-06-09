@@ -1,7 +1,7 @@
 {
-  "name": "Google Maps Util",
-  "description": "Google Maps Util",
-  "version": "1.0.1",
+  "name": "MakeItBetter",
+  "description": "MakeItBetter",
+  "version": "1.0.0",
   "manifest_version": 3,
   "icons": {
     "16": "icon.png",
@@ -10,18 +10,15 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Google Maps Util",
+    "default_title": "Maps Util",
     "default_icon": "icon.png"
   },
-  "permissions": ["contextMenus", "tabs", "storage"],
+  "permissions": ["contextMenus", "storage","sidePanel"],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://*.github.com/*"],
-      "js": ["contentScript.js"]
-    }
-  ]
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
 }
