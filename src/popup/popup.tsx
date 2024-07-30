@@ -24,7 +24,7 @@ type AppProps = {
   optionsProps: any
 };
 
-const DispCard =({ path,onDelete,onSetHomePath,optionsProps }: AppProps)=>{
+const PromptDetailCard =({ path,onDelete,onSetHomePath,optionsProps }: AppProps)=>{
 const [options,setOptions] = useState<LocalStorageOptions | null>(optionsProps)
   useEffect(() => {
     setOptions(optionsProps)
@@ -60,7 +60,7 @@ const App: React.FC<{}> = () => {
 
 
 
-  const handleCityButtonClick = () => {
+  const onPromptSubmit = () => {
     if (pathInput === '') {
       return
     }
@@ -98,18 +98,32 @@ const App: React.FC<{}> = () => {
 
 
   const handleOverlayButtonClick = () => {
-    // chrome.tabs.query(
-    //   {
-    //     active: true,
-    //     currentWindow: true,
-    //   },
-    //   (tabs) => {
-    //     if (tabs.length > 0) {
-    //       chrome.tabs.sendMessage(tabs[0].id, "Dummy")
-    //     }
-    //   }
-    // )
     chrome.runtime.sendMessage(null,()=>{})
+  }
+  const AddYourPromptCard = () =>{
+    return (<Grid item xs={12}>
+      <Paper>
+        <div style={{display:'flex'}}>
+          <div style={{flex: 11,justifyItems:'center',alignItems:'center',marginTop:'8px',marginLeft:'5px'}}><InputBase
+            placeholder="Add your prompt"
+            fullWidth
+            value={pathInput}
+            onChange={(event) => setPathInput(event.target.value)}
+            onKeyPress={(eve)=>{
+              if(eve.key==='Enter'){
+                onPromptSubmit()
+              }
+            }}
+          />
+          </div>
+          <div style={{flex: 1}}>
+          <IconButton onClick={onPromptSubmit}>
+            <AddIcon />
+          </IconButton>
+          </div>
+          </div>
+      </Paper>
+    </Grid>)
   }
 
   return (
@@ -125,13 +139,13 @@ const App: React.FC<{}> = () => {
                 onChange={(event) => setPathInput(event.target.value)}
                 onKeyPress={(eve)=>{
                   if(eve.key==='Enter'){
-                    handleCityButtonClick()
+                    onPromptSubmit()
                   }
                 }}
               />
               </div>
               <div style={{flex: 1}}>
-              <IconButton onClick={handleCityButtonClick}>
+              <IconButton onClick={onPromptSubmit}>
                 <AddIcon />
               </IconButton>
               </div>
@@ -140,7 +154,7 @@ const App: React.FC<{}> = () => {
         </Grid>
       </Grid>
       {
-        paths.map((path,i) => <DispCard key={path+i} optionsProps={options} path={path} onDelete={()=>{handlePathDeleteButtonClick(i)}} onSetHomePath={()=>handleSetHomePath(path)}/>
+        paths.map((path,i) => <PromptDetailCard key={path+i} optionsProps={options} path={path} onDelete={()=>{handlePathDeleteButtonClick(i)}} onSetHomePath={()=>handleSetHomePath(path)}/>
         )
       }
       </div>
