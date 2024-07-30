@@ -1,4 +1,6 @@
-# React Chrome Extension Boilerplate
+# Secure Genie AI 
+https://chromewebstore.google.com/detail/securegenie-ai/nineodnoejclcbppiadeoofcabdkdndi
+https://www.producthunt.com/posts/securegenie-ai
 
 ## Getting Started
 
