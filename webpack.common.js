@@ -6,9 +6,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     popup: path.resolve('src/popup/popup.tsx'),
-    options: path.resolve('src/options/options.tsx'),
+    // options: path.resolve('src/options/options.tsx'),
     background: path.resolve('src/background/background.ts'),
-    contentScript: path.resolve('src/contentScript/contentScript.tsx'),
+    // contentScript: path.resolve('src/contentScript/contentScript.tsx'),
     sidepanel: path.resolve('src/sidepanel/sidepanel.tsx')
   },
   module: {
@@ -64,7 +64,7 @@ module.exports = {
 
 function getHtmlPlugins(chunks) {
   return chunks.map(chunk => new HtmlPlugin({
-    title: 'Weather Extension',
+    title: 'SecureGenie AI Chrome Extension',
     filename: `${chunk}.html`,
     chunks: [chunk],
   }))

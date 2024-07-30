@@ -1,7 +1,7 @@
 {
-  "name": "weather-extension",
+  "name": "securegenie-ai",
   "version": "1.0.0",
-  "description": "React Weather Extension",
+  "description": "SecureGenie AI Chrome Extension",
   "scripts": {
     "start": "webpack --watch --progress --config webpack.dev.js",
     "build": "webpack --watch --progress --config webpack.prod.js"

@@ -1,4 +1,3 @@
-// import { OpenWeatherTempScale } from './api'
 
 export interface LocalStorage {
   paths?: string[]
@@ -12,16 +11,6 @@ export interface LocalStorageOptions {
 
 export type LocalStorageKeys = keyof LocalStorage
 
-// export function setStoredCities(cities: string[]): Promise<void> {
-//   const vals: LocalStorage = {
-//     cities,
-//   }
-//   return new Promise((resolve) => {
-//     chrome.storage.local.set(vals, () => {
-//       resolve()
-//     })
-//   })
-// }
 
 export function getStoredPaths(): Promise<string[]> {
   const keys: LocalStorageKeys[] = ['paths']

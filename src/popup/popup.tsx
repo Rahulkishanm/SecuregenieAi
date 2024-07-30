@@ -8,7 +8,6 @@ import {
 } from '@material-ui/icons'
 import 'fontsource-roboto'
 import './popup.css'
-import HomeIcon from '@material-ui/icons/Home';
 import {
   setStoredPaths,
   setStoredOptions,
@@ -16,24 +15,7 @@ import {
   getStoredOptions,
   LocalStorageOptions,
 } from '../utils/storage'
-async function loadFirebase() {
-  // Dynamically import the Firebase app module
-  const { initializeApp } = await import('firebase/app');
 
-  // Your Firebase config object
-  const firebaseConfig = {
-    apiKey: "AIzaSyCLoDDlq8xRNXH3uvTCvwBPIZp302zG8NQ",
-    authDomain: "chrome-extension-gpt-util.firebaseapp.com",
-    projectId: "chrome-extension-gpt-util",
-    storageBucket: "chrome-extension-gpt-util.appspot.com",
-    messagingSenderId: "998134105401",
-    appId: "1:998134105401:web:c660c43faf0146645b54e8",
-    measurementId: "G-RBJHLC64TY"
-  };
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  return app;
-}
 
 type AppProps = {
   path: string;
@@ -50,16 +32,11 @@ const [options,setOptions] = useState<LocalStorageOptions | null>(optionsProps)
   const isHome =options && options.homePath && options.homePath === path;
   console.log("isHome",isHome)
   return  (  <Box mx="8px" my="16px"><Paper><Grid container justify="space-evenly">
-  <Grid item xs={9}>
+  <Grid item xs={10}>
         <div style={{marginTop:'10px',marginLeft:'5px',width:'100%',overflow:'auto'}}>
        <Typography>{path}</Typography>
        </div>
 
-  </Grid>
-  <Grid item xs={1}>
-        <IconButton onClick={()=>{onSetHomePath()}}>
-          {isHome ? <HomeIcon color='secondary'/> : <HomeIcon color='disabled'/>}
-        </IconButton>
   </Grid>
   <Grid item xs={2}>
         <IconButton onClick={()=>{onDelete()}}>
@@ -81,16 +58,7 @@ const App: React.FC<{}> = () => {
     } )
   }, [])
 
-  // useEffect(()=>{
-  //   console.log("balls outside",options,paths)
-  //   if(options && paths.length >0 && (options.homePath === null || options.homePath === undefined || options.homePath === '') ){
-  //     console.log("balls inside")
-  //     // handleSetHomePath(paths[0])
-  //   }
-  //   if(paths.length === 0){
-  //     // handleSetHomePath('')
-  //   }
-  // },[paths,options])
+
 
   const handleCityButtonClick = () => {
     if (pathInput === '') {
@@ -127,7 +95,7 @@ const App: React.FC<{}> = () => {
       setOptions(updateOptions)
     })
   }
-  //onhomechange trigger event 
+
 
   const handleOverlayButtonClick = () => {
     // chrome.tabs.query(
@@ -182,8 +150,3 @@ const App: React.FC<{}> = () => {
 const root = document.createElement('div')
 document.body.appendChild(root)
 ReactDOM.render(<App />, root)
-loadFirebase().then(app => {
-  console.log('Firebase has been initialized!', app);
-}).catch(error => {
-  console.error('Error loading Firebase:', error);
-});
